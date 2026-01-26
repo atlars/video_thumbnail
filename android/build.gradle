@@ -4,7 +4,7 @@ version '1.0-SNAPSHOT'
 buildscript {
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
 
     dependencies {
@@ -15,7 +15,7 @@ buildscript {
 rootProject.allprojects {
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
 }
 
@@ -23,11 +23,11 @@ apply plugin: 'com.android.library'
 
 android {
     namespace 'xyz.justsoft.video_thumbnail'
-    
-    compileSdkVersion 33
+    compileSdkVersion flutter.compileSdkVersion
 
     defaultConfig {
         minSdkVersion 16
+        targetSdk flutter.targetSdkVersion
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     lintOptions {
