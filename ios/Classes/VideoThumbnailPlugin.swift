@@ -1,25 +1,17 @@
 import Flutter
 import UIKit
 import AVFoundation
-import SDWebImage
-import SDWebImageWebPCoder
 
-public class SwiftVideoThumbnailPlugin: NSObject, FlutterPlugin {
+public class VideoThumbnailPlugin: NSObject, FlutterPlugin {
 
   public static func register(with registrar: FlutterPluginRegistrar) {
-    // Keep the original channel name for compatibility with the existing Dart API.
+
     let channel = FlutterMethodChannel(
       name: "plugins.justsoft.xyz/video_thumbnail",
       binaryMessenger: registrar.messenger()
     )
-    let instance = SwiftVideoThumbnailPlugin()
+    let instance = VideoThumbnailPlugin()
     registrar.addMethodCallDelegate(instance, channel: channel)
-
-    // Ensure the WebP coder is registered once.
-    let webpCoder = SDImageWebPCoder.shared
-    if !SDImageCodersManager.shared.coders.contains(where: { $0 === webpCoder }) {
-      SDImageCodersManager.shared.addCoder(webpCoder)
-    }
   }
 
   public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
@@ -113,7 +105,7 @@ public class SwiftVideoThumbnailPlugin: NSObject, FlutterPlugin {
         switch format {
         case 0: ext = "jpg"
         case 1: ext = "png"
-        default: ext = "webp"
+        default: ext = "jpg"
         }
 
         var thumbnailURL = videoURL.deletingPathExtension().appendingPathExtension(ext)
@@ -196,14 +188,7 @@ public class SwiftVideoThumbnailPlugin: NSObject, FlutterPlugin {
       return image.pngData()
     }
 
-    // WebP using SDWebImageWebPCoder
-    let webpCoder = SDImageWebPCoder.shared
     let q = max(0.0, min(1.0, Double(quality) * 0.01))
-    let options: [SDImageCoderOption: Any] = [
-      .encodeCompressionQuality: q
-    ]
-
-    return webpCoder.encodedData(with: image, format: .webP, options: options)
+    return image.jpegData(compressionQuality: q)
   }
 }
-

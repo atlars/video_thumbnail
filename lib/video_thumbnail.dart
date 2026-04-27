@@ -7,9 +7,8 @@ import 'dart:async' show Future;
 
 import 'package:flutter/services.dart';
 
-/// Support most popular image formats.
-/// Uses libwebp to encode WebP image on iOS platform.
-enum ImageFormat { JPEG, PNG, WEBP }
+/// Supported output image formats.
+enum ImageFormat { JPEG, PNG }
 
 class VideoThumbnail {
   static const MethodChannel _channel = MethodChannel(

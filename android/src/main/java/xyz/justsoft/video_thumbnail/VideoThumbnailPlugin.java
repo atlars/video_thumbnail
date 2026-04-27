@@ -94,7 +94,6 @@ public class VideoThumbnailPlugin implements FlutterPlugin, MethodCallHandler {
     private static Bitmap.CompressFormat intToFormat(int format) {
         return switch (format) {
             case 1 -> Bitmap.CompressFormat.PNG;
-            case 2 -> Bitmap.CompressFormat.WEBP;
             default -> Bitmap.CompressFormat.JPEG;
         };
     }
@@ -102,7 +101,6 @@ public class VideoThumbnailPlugin implements FlutterPlugin, MethodCallHandler {
     private static String formatExt(int format) {
         return switch (format) {
             case 1 -> "png";
-            case 2 -> "webp";
             default -> "jpg";
         };
     }

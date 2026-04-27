@@ -312,23 +312,6 @@ class _DemoHomeState extends State<DemoHome> {
                   const Text("PNG"),
                 ],
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  Radio<ImageFormat>(
-                    groupValue: _format,
-                    value: ImageFormat.WEBP,
-                    onChanged: (v) => setState(() {
-                      if (v != null) {
-                        _format = v;
-                        _editNode.unfocus();
-                      }
-                    }),
-                  ),
-                  const Text("WebP"),
-                ],
-              ),
             ],
           ),
         ),
